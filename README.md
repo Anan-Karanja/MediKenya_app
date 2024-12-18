@@ -129,42 +129,97 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
 ```bash
 telemedicine-app/
-├── backend/                       # Backend (Node.js + Express + MySQL)
-│   ├── config/                    # Configuration files
-│   │   └── db.js                  # Database connection configuration
-│   │   └── auth.js                # Authentication and authorization middleware
-│   ├── controllers/               # Controllers for handling logic
-│   │   └── patientController.js   # Logic for patient-related actions
-│   │   └── doctorController.js    # Logic for doctor-related actions
-│   │   └── adminController.js     # Logic for admin-related actions
-│   │   └── appointmentController.js # Logic for appointment-related actions
-│   ├── models/                    # Database models
-│   │   └── Patient.js             # Patient schema
-│   │   └── Doctor.js              # Doctor schema
-│   │   └── Admin.js               # Admin schema
-│   │   └── Appointment.js         # Appointment schema
-│   ├── routes/                    # Routes for API endpoints
-│   │   └── patientRoutes.js       # Routes for patient-related endpoints
-│   │   └── doctorRoutes.js        # Routes for doctor-related endpoints
-│   │   └── adminRoutes.js         # Routes for admin-related endpoints
-│   │   └── appointmentRoutes.js   # Routes for appointment-related endpoints
-│   ├── middleware/                # Middleware functions
-│   │   └── authMiddleware.js      # Authentication middleware
-│   └── server.js                  # Server setup and entry point
-├── frontend/                      # Frontend (HTML, CSS, JS)
-│   ├── public/                    # Public assets (images, CSS, JS)
-│   │   ├── css/
-│   │   │   └── styles.css         # Stylesheets
-│   │   ├── js/
-│   │   │   └── main.js            # JavaScript functions
-│   ├── views/                     # EJS templates for dynamic rendering
-│   │   └── partials/              # Reusable partial views
-│   │   │   └── footer.ejs         # Footer for all pages
-│   │   └── login.ejs              # Login page for all users
-│   │   └── patientDashboard.ejs   # Patient dashboard with appointment booking
-│   │   └── doctorDashboard.ejs    # Doctor dashboard with appointment approval
-│   │   └── adminDashboard.ejs     # Admin dashboard
-├── .env                           # Environment variables
-├── package.json                   # Dependencies and scripts
-└── README.md                      # Project documentation
+├── backend/                           # Backend logic and configuration (Node.js + Express + MySQL)
+│   ├── config/                        # Configuration files (dotenv, DB connection, session setup)
+│   │   ├── db.js                      # Database connection setup
+│   │   ├── auth.js                    # Authentication and session setup
+│   ├── controllers/                   # Request-handling logic (Express + MVC pattern)
+│   │   ├── patientController.js       # Logic for patient actions
+│   │   ├── doctorController.js        # Logic for doctor actions
+│   │   ├── adminController.js         # Logic for admin actions
+│   │   ├── appointmentController.js   # Logic for appointment actions
+│   ├── models/                        # Database models (Sequelize or MySQL queries)
+│   │   ├── Patient.js                 # Patient table representation
+│   │   ├── Doctor.js                  # Doctor table representation
+│   │   ├── Admin.js                   # Admin table representation
+│   │   ├── Appointment.js             # Appointment table representation
+│   ├── routes/                        # API endpoints (Express Router)
+│   │   ├── patientRoutes.js           # Routes for patient API calls
+│   │   ├── doctorRoutes.js            # Routes for doctor API calls
+│   │   ├── adminRoutes.js             # Routes for admin API calls
+│   │   ├── appointmentRoutes.js       # Routes for appointment API calls
+│   ├── middleware/                    # Middleware functions
+│   │   ├── authMiddleware.js          # Authentication and role-based access middleware
+│   │   ├── validationMiddleware.js    # Input validation middleware
+│   └── server.js                      # Main server file
+
+├── frontend/                          # Frontend assets and templates (EJS + CSS + Vanilla JS)
+│   ├── public/                        # Static assets (CSS, JS, Images)
+│   │   ├── css/                       # Styling (CSS)
+│   │   │   ├── global.css             # Global styles
+│   │   │   ├── auth.css               # Login and registration-specific styles
+│   │   │   ├── dashboard.css          # Dashboard-specific styles
+│   │   │   ├── error.css              # Styles for error pages
+│   │   │   ├── skeleton.css           # Skeleton loading effect styles
+│   │   ├── js/                        # Frontend interactivity (JavaScript)
+│   │   │   ├── main.js                # Main JavaScript for general interactions
+│   │   │   ├── alerts.js              # JavaScript for SweetAlert notifications
+│   │   │   ├── formValidation.js      # JavaScript for client-side form validation
+│   │   │   ├── skeletonLoader.js      # Skeleton loader effect implementation
+│   │   ├── images/                    # Static images
+│   │       ├── logo.png               # Application logo
+│   ├── views/                         # EJS templates for server-side rendering
+│   │   ├── partials/                  # Shared layouts and reusable components
+│   │   │   ├── footer.ejs             # Footer template
+│   │   ├── auth/                      # Authentication templates
+│   │   │   ├── login.ejs              # Login page
+│   │   │   ├── registerPatient.ejs    # Patient registration form
+│   │   │   ├── registerDoctor.ejs     # Doctor registration form
+│   │   ├── dashboards/                # Dashboard templates
+│   │   │   ├── patientDashboard.ejs   # Patient dashboard (includes appointments)
+│   │   │   ├── doctorDashboard.ejs    # Doctor dashboard
+│   │   │   ├── adminDashboard.ejs     # Admin dashboard
+│   │   ├── errors/                    # Error pages
+│   │   │   ├── 404.ejs                # Page not found (404)
+│   │   │   ├── 500.ejs                # Internal server error (500)
+│   │   ├── home.ejs                   # Default home page template
+├── .env                               # Environment variables
+├── README.md                          # Project documentation
+```
+
+## Dependencies
+
+The following dependencies are used in this project:
+
+1. **bcryptjs**: A library used for hashing passwords before storing them in the database, ensuring secure authentication and protecting user data. (Version: `^2.4.3`)
+2. **body-parser**: A middleware used for parsing incoming request bodies, making it easier to handle form data, JSON, and URL-encoded requests. (Version: `^1.20.3`)
+3. **connect-session-sequelize**: Stores session data in a Sequelize-managed database, replacing the default in-memory store, making sessions persistent across server restarts. (Version: `^7.1.7`)
+4. **cors**: Middleware that enables Cross-Origin Resource Sharing (CORS), allowing the frontend and backend to communicate across different domains or ports. (Version: `^2.8.5`)
+5. **dotenv**: Loads environment variables from a `.env` file into `process.env`. It is used to manage sensitive information like database credentials, API keys, and other configuration variables. (Version: `^16.4.7`)
+6. **ejs**: A templating engine used to render dynamic HTML pages by embedding JavaScript into HTML. (Version: `^3.1.10`)
+7. **express**: A fast, unopinionated web framework for Node.js that simplifies routing and handling HTTP requests and responses. (Version: `^4.21.2`)
+8. **express-session**: Middleware that manages user sessions, enabling persistent login states and user-specific data throughout the lifecycle of a user's session. (Version: `^1.18.1`)
+9. **express-validator**: Middleware functions used for validating and sanitizing user input, ensuring that incoming data is clean and secure before processing or storing it. (Version: `^7.2.0`)
+10. **morgan**: An HTTP request logger middleware for Node.js. It logs details of incoming requests, which helps in debugging and monitoring during development. (Version: `^1.10.0`)
+11. **mysql2**: A MySQL database client for Node.js. It enables interaction with a MySQL database, performing operations like querying and updating data. (Version: `^3.11.5`)
+12. **nodemon**: A development tool that automatically restarts the Node.js server when file changes are detected, improving workflow. (Version: `^3.1.9`)
+13. **sequelize**: A promise-based ORM for Node.js that simplifies interactions with MySQL databases. It provides an easy-to-use API to query and manage data in the database. (Version: `^6.37.5`)
+14. **simple-peer**: A WebRTC library that simplifies the peer-to-peer connection setup for video calling functionality. (Version: `^9.11.1`)
+15. **socket.io**: A library for real-time, bidirectional communication between clients and the server, essential for signaling in WebRTC. (Version: `^4.8.1`)
+16. **socket.io-client**: The client-side library for connecting to the signaling server used in WebRTC. (Version: `^4.8.1`)
+
+## Installing the dependencies
+
+Run the following command in the terminal:
+
+```bash
+npm install bcryptjs body-parser connect-session-sequelize cors dotenv ejs express express-session express-validator morgan mysql2 sequelize socket.io socket.io-client simple-peer
+```
+
+## Generate a random set of string
+
+✅ You can use the built-in crypto module in Node.js to create a cryptographically strong random string. Here’s a simple command you can run:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 ```
