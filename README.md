@@ -95,8 +95,6 @@ In this assignment, students will design and develop the backend telemedicine ap
 
 4. **routes/**: Defines route handlers for different API endpoints (patients, doctors, admin, and appointments).
 
-5. **services/**: Contains business logic that is separated from the controllers, improving maintainability. Includes files like `patientService.js`, `doctorService.js`, and `appointmentService.js`.
-
 6. **middleware/**: Middleware for authentication and authorization, including `authMiddleware.js`.
 
 7. **server.js**: The entry point for the backend server. It sets up the Express application and connects to the database.
