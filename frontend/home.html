@@ -7,30 +7,52 @@
     <link rel="stylesheet" href="/frontend/public/css/global.css">
     <link rel="stylesheet" href="/frontend/public/css/home.css">
     <script src="/frontend/public/js/main.js" defer></script>
+    <script src="https://kit.fontawesome.com/84dc69d9ca.js" crossorigin="anonymous"></script>
     <title>Home - MediKenya</title>
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Header with Navbar -->
     <header>
-        <nav class="navbar">
+        <nav class="navbar" role="navigation" aria-label="Main Navigation">
             <div class="logo">
-                <a href="/frontend/home.html"><img src="/frontend/public/images/logo.png" alt="MediKenya Logo"></a>
+                <a href="/frontend/home.html" aria-label="Go to Home">
+                    <img src="/frontend/public/images/logo.png" alt="MediKenya Logo">
+                </a>
             </div>
-            <div class="menu-toggle" id="menu-toggle">
+            <div id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+                aria-controls="nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="/auth/login" class="login-btn">Login</a></li>
+            <ul id="nav-links" class="nav-links" role="menu">
+                <li role="menuitem"><a href="#home">Home</a></li>
+                <li role="menuitem"><a href="#about">About</a></li>
+                <li role="menuitem"><a href="#services">Services</a></li>
+                <li role="menuitem"><a href="#contact">Contact</a></li>
+                <li role="menuitem"><a href="/auth/login" class="login-btn">Login/Sign Up</a></li>
             </ul>
         </nav>
     </header>
-</body>
 
+    <!-- Main Content -->
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Expert Care, Anytime, Anywhere.</h1>
+                <p>Experience the future of medicine with our cutting-edge telemedicine platform.</p>
+                <div class="hero-actions">
+                    <a href="#get-started" class="btn-primary" aria-label="Get Started">Get Started</a>
+                    <a href="https://www.youtube.com/watch?v=B9oC8vUjqk8" class="btn-primary"
+                        aria-label="About Telemedicine" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/frontend/public/images/hero.jpeg" alt="Telemedicine platform illustration">
+            </div>
+        </section>
+    </main>
+</body>
 
 </html>
