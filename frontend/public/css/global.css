@@ -69,3 +69,46 @@ a {
 a:hover {
     color: var(--primary-dark-blue);
 }
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: var(--primary-white);
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px 3px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 135%;
+    left: 50%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::before {
+    content: "";
+    position: absolute;
+    top: 99%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
