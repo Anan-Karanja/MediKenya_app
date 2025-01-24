@@ -145,6 +145,7 @@ telemedicine-app/
 │   │   ├── patientRoutes.js           # Routes for patient API calls
 │   │   ├── doctorRoutes.js            # Routes for doctor API calls
 │   │   ├── adminRoutes.js             # Routes for admin API calls
+│   │   ├── searchRoutes.js            # Routes for search API calls
 │   │   ├── appointmentRoutes.js       # Routes for appointment API calls
 │   ├── middleware/                    # Middleware functions
 │   │   ├── authMiddleware.js          # Authentication and role-based access middleware
