@@ -80,7 +80,7 @@ function checkAuthentication(req, res, next) {
 
 // Home route
 app.get("/", (req, res) => {
-  res.render("home"); // Render the "home" view
+  res.sendFile(__dirname, "home.ejs"); // Render the "home" view
 });
 
 // Use imported routes for patient, doctor, admin, appointment, and search
